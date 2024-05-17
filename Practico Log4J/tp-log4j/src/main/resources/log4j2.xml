@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <Console name="ConsoleJson" target="SYSTEM_OUT">
+            <PatternLayout pattern='{\"timestamp\":\"%d{yyyy-MM-dd HH:mm:ss.SSS}\", \"thread\":\"[%t]\", \"level\":\"%-5level\", \"logger\":\"%logger{36}\", \"message\":\"%msg\"}%n'/>
+        </Console>
+
+        <Console name="ConsoleCustom" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5level [%t]: %msg%n"/>
+        </Console>
+
+        <Console name="ConsoleShort" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+
+        <Console name="ConsoleThread" target="SYSTEM_OUT">
+            <PatternLayout>
+                <!-- Incluye los datos del contexto del hilo en el mensaje de registro -->
+                <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} [%X{sessionId},%X{userId}] - %msg%n</pattern>
+            </PatternLayout>
+        </Console>
+
+        <File name="File" fileName="log.txt">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <RollingFile name="RollingFile" fileName="rollingLog.log"
+                     filePattern="rollingLog-%d{yyyyMMdd-HHmm}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <CronTriggeringPolicy schedule="0 0/2 * * * ?"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref="ConsoleJson"/>-->
+<!--            <AppenderRef ref="ConsoleCustom"/>-->
+<!--            <AppenderRef ref="ConsoleShort"/>-->
+            <AppenderRef ref="ConsoleThread"/>
+<!--            <AppenderRef ref="File"/>-->
+<!--            <AppenderRef ref="RollingFile"/>-->
+        </Root>
+    </Loggers>
+    <CustomLevels>
+        <CustomLevel name="MiLogLevel" intLevel="350" />
+    </CustomLevels>
+</Configuration>

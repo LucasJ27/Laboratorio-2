@@ -1,0 +1,1 @@
+22:06:11.432 [main] INFO  MiLog - Este es un mensaje de nivel INFO
